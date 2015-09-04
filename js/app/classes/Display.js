@@ -1,10 +1,15 @@
 define(function() {
 
-    function Display(displayOptions) {
-        this.width = displayOptions.width;
-        this.height = displayOptions.height;
-        this.ctx = null;
+    //Private variables
+    var _width,
+        _height,
+        _ctx;
 
+    function Display(displayOptions) {
+        //Set variables
+        _width = displayOptions.width;
+        _height = displayOptions.height;
+        //Run init in constructor
         this.init();
     }
 
@@ -13,30 +18,29 @@ define(function() {
             //Add Canvas with specified dimensions and context to the body
             var body = document.getElementsByTagName('body')[0];
             var canvas = document.createElement('canvas');
-            canvas.setAttribute('width', this.width);
-            canvas.setAttribute('height', this.height);
+            canvas.setAttribute( 'width', this.getWidth() );
+            canvas.setAttribute( 'height', this.getHeight() );
             body.appendChild(canvas);
 
             //Add the context to the the constructor
-            this.ctx = canvas.getContext('2d');
+            _ctx = canvas.getContext('2d');
         },
 
+        //GETTERS
         getWidth: function() {
-            return this.width;
+            return _width;
         },
 
         getHeight: function() {
-            return this.height;
+            return _height;
         },
 
-        //Checks if canvas context has been properly initialized and returns it
-        //Safer than just assigning gfx = this.ctx;
         getGfx: function() {
-           if(this.ctx != null) {
-               return this.ctx;
+           if(_ctx != null) {
+               return _ctx;
            }
            else {
-               throw "Cannot return graphic. Check the Display.init() function";
+               throw "Cannot return graphics.";
            }
         }
     };
