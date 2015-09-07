@@ -11,38 +11,68 @@ define(['Display'], function(Display) {
 
     Game.prototype = {
         start: function() {
-            if(_running) return; //Essentially do nothing
+            if(_running) return;
+            //Essentially do nothing for now
+            //Replace with states
+
             //Else start the game
             _running = true;
-            this.update();
+            this.main();
         },
 
-        xPos: 0,
+        xPos: 0, //Temporary variable
+        yPos: 0,
 
-        tick: function() {
-            if(this.xPos >= 0 && this.xPos < this.width - 40) {
-                this.xPos += 1;
+        update: function( delta ) {
+            var distance = delta * 800;
+            console.log(distance);
+            //Testing update of xPos
+            if( this.xPos >= 0 && this.xPos < this.width - 40 ) {
+                this.xPos += distance;
             }
         },
+
+        main: function() {
+            var self = this;
+            function loop() {
+                var delta = _setDelta();
+                self.update( delta );
+                self.render();
+                window.requestAnimationFrame( loop );
+            }
+            loop();
+        },
+
 
         render: function() {
             console.log(this);
+            //Clear the screen of previous renders
             this.graphics.clearRect(0,0,this.width, this.height);
+            //Create rectangle
             this.graphics.fillRect(this.xPos,0,40,40);
         },
 
-        update: function() {
-            var self = this;
+        //Getter
+        isRunning: function() {
+            return _running;
+        },
 
-            function loop() {
-                self.tick();
-                self.render();
-                window.requestAnimationFrame(loop);
-            }
-            loop();
+        //Setter
+        toggleRunning: function() {
+            _running = !_running; //Flip state between true/false
         }
 
     };
+
+    function _setDelta() {
+        if(!then) {
+            var then = Date.now() - 1;
+        }
+        var now = Date.now();
+        var delta = (now - then) / 1000;
+        then = now;
+        return delta;
+    }
 
     return Game;
 
