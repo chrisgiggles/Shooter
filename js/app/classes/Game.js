@@ -45,7 +45,6 @@ define(['Display'], function(Display) {
 
 
         render: function() {
-            console.log(this);
             //Clear the screen of previous renders
             this.graphics.clearRect(0,0,this.width, this.height);
             //Create rectangle

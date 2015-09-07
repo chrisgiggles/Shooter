@@ -14,7 +14,9 @@ requirejs.config({
     'paths': {
         //Classes
         'Display': 'app/classes/Display',
-        'Game': 'app/classes/Game'
+        'Game': 'app/classes/Game',
+        'Events': 'app/classes/Events',
+        'Assets': 'app/classes/Assets'
     }
 });
 
