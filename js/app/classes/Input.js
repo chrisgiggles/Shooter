@@ -16,7 +16,7 @@ define(['Utils'], function(Utils) {
             window.addEventListener('keyup', this.keyUp.bind(this), false);
         },
 
-        findKey:function(e){
+        findKey: function(e) {
             for( var prop in keyMap ) {
                 if ( keyMap.hasOwnProperty(prop) ) {
                     if ( keyMap[prop] === e.which ) {

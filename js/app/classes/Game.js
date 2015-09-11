@@ -1,6 +1,6 @@
-define(['Display', 'Input', 'Events'], function(Display, Input, Events) {
+define(['Display', 'Input', 'Events', 'Player'], function(Display, Input, Events, Player) {
 
-    var _display = new Display({width: 640, height: 480}),
+    var _display = new Display({width: 640, height: 640}),
         _running = false,
         _fps = 1 / 50,
         _input = new Input(), // Put in a global handler
@@ -10,6 +10,7 @@ define(['Display', 'Input', 'Events'], function(Display, Input, Events) {
         this.graphics = _display.getGfx();
         this.width = _display.getWidth();
         this.height = _display.getHeight();
+        this.player = new Player();
     }
 
     Game.prototype = {
@@ -39,7 +40,7 @@ define(['Display', 'Input', 'Events'], function(Display, Input, Events) {
         },
 
         update: function( delta ) {
-            var speed = delta * 175;
+            var speed = delta * 145;
             //Testing keyboard input
             if(_input.down) {
                 this.yPos += speed;
@@ -61,6 +62,8 @@ define(['Display', 'Input', 'Events'], function(Display, Input, Events) {
                 this.bulletX = this.xPos;
                 this.bulletY = speed;
             }
+
+            this.player.update( delta );
         },
 
         render: function() {
@@ -73,6 +76,7 @@ define(['Display', 'Input', 'Events'], function(Display, Input, Events) {
                 this.graphics.fillStyle = "#E54D42";
                 this.graphics.fillRect(this.bulletX + 11, this.bulletY, 50, 50);
             }
+            this.player.render();
         },
         //Getter
         isRunning: function() {

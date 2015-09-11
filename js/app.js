@@ -12,12 +12,15 @@
 requirejs.config({
     'baseUrl': 'js',
     'paths': {
-        //Classes
+        //General Classes
         'Display': 'app/classes/Display',
         'Game': 'app/classes/Game',
         'Events': 'app/classes/Events',
         'Assets': 'app/classes/Assets',
         'Input': 'app/classes/Input',
+        //Entity classes
+        'Entity': 'app/entities/Entity',
+        'Player': 'app/entities/Player',
         //Utilities
         'Utils': 'app/utils/utils'
     }
