@@ -5,6 +5,7 @@ define(['Utils'], function(Utils) {
         this.down = false;
         this.left = false;
         this.right = false;
+        this.shoot = false;
 
         this.registerEvents();
     }
@@ -34,7 +35,9 @@ define(['Utils'], function(Utils) {
 
         keyUp: function(e) {
             var prop = this.findKey(e);
-            this[prop] = false;
+            if (prop) {
+                this[prop] = false;
+            }
         }
     };
 
@@ -42,7 +45,8 @@ define(['Utils'], function(Utils) {
         up: 38,
         down: 40,
         left: 37,
-        right: 39
+        right: 39,
+        shoot: 90
     };
 
     return Input;

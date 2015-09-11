@@ -1,9 +1,10 @@
-define(['Display', 'Input'], function(Display, Input) {
+define(['Display', 'Input', 'Events'], function(Display, Input, Events) {
 
     var _display = new Display({width: 640, height: 480}),
         _running = false,
         _fps = 1 / 50,
-        _input = new Input(); // Put in a global handler
+        _input = new Input(), // Put in a global handler
+        _events = new Events();
 
     function Game() {
         this.graphics = _display.getGfx();
@@ -24,6 +25,8 @@ define(['Display', 'Input'], function(Display, Input) {
 
         xPos: 320, //Temporary variables
         yPos: 300, //Temp
+        bulletX: 0,
+        bulletY: 0,
 
         main: function() {
             var self = this;
@@ -53,15 +56,24 @@ define(['Display', 'Input'], function(Display, Input) {
             if(_input.right) {
                 this.xPos += speed;
             }
+
+            if(_input.shoot) {
+                this.bulletX = this.xPos;
+                this.bulletY = speed;
+            }
         },
 
         render: function() {
             //Clear the screen of previous renders
             this.graphics.clearRect(0,0,this.width, this.height);
             //Create rectangle
+            this.graphics.fillStyle = "#2B303B";
             this.graphics.fillRect(this.xPos,this.yPos,28,40);
+            if(_input.shoot) {
+                this.graphics.fillStyle = "#E54D42";
+                this.graphics.fillRect(this.bulletX + 11, this.bulletY, 50, 50);
+            }
         },
-
         //Getter
         isRunning: function() {
             return _running;

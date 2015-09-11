@@ -30,7 +30,7 @@ define(function() {
             }
 
             _eventList[eventName].forEach(function(fn) {
-                fn(this.sender, arg);
+                fn(arg);
             });
         }
     };
