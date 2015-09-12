@@ -40,23 +40,52 @@ define(['Display', 'Input', 'Events', 'Player'], function(Display, Input, Events
         },
 
         update: function( delta ) {
-            var speed = delta * 145;
+            //Check bounds
+            if(this.xPos <= 2) {
+                this.xPos = 2;
+            }
+
+            if (this.xPos >= this.width - 30) {
+                this.xPos = this.width - 30;
+            }
+
+            if (this.yPos <= 2) {
+                this.yPos = 2;
+            }
+
+            if (this.yPos >= this.height - 42) {
+                this.yPos = this.height - 42;
+            }
+
+            //Makes the inputs smoother if up/down or left/right is pressed simultaneously
+            function fireLatest(current, speed) {
+                var stack = [current.y,current.x];
+
+                if(_input.down) {
+                    stack[0] += speed;
+                }
+                else if(_input.up) {
+                    stack[0] += -speed;
+                }
+
+                if(_input.left) {
+                    stack[1] += -speed;
+                }
+                else if(_input.right) {
+                    stack[1] += speed;
+                }
+
+                return stack;
+            }
+
+            //Inputs
+            var speed = delta * 135;
             //Testing keyboard input
-            if(_input.down) {
-                this.yPos += speed;
-            }
-
-            if(_input.up) {
-                this.yPos -= speed;
-            }
-
-            if(_input.left) {
-                this.xPos -= speed;
-            }
-
-            if(_input.right) {
-                this.xPos += speed;
-            }
+            var currentPos = {y: this.yPos,x: this.xPos};
+            var latestInput = fireLatest(currentPos, speed);
+            this.yPos = latestInput[0];
+            this.xPos = latestInput[1];
+            console.log(latestInput);
 
             if(_input.shoot) {
                 this.bulletX = this.xPos;
