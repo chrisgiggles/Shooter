@@ -1,4 +1,4 @@
-define(['Display', 'Events', 'Player'], function(Display, Events, Player) {
+define(['Display', 'Events', 'Player'], function( Display, Events, Player) {
 
     var _display = new Display({width: 640, height: 640}),
         _running = false,
@@ -32,7 +32,7 @@ define(['Display', 'Events', 'Player'], function(Display, Events, Player) {
             var self = this;
             function loop() {
                 self.update( _fps );
-                self.render();
+                self.render( self.graphics );
                 window.requestAnimationFrame( loop );
             }
             loop();
@@ -42,13 +42,10 @@ define(['Display', 'Events', 'Player'], function(Display, Events, Player) {
             this.player.update( delta );
         },
 
-        render: function() {
+        render: function( gfx ) {
             //Clear the screen of previous renders
-            this.graphics.clearRect(0,0,this.width, this.height);
-            //Create rectangle
-            this.graphics.fillStyle = "#2B303B";
-            this.graphics.fillRect(this.player.pos.x, this.player.pos.y,this.player.width,this.player.height);
-            this.player.render();
+            gfx.clearRect(0,0,this.width, this.height);
+            this.player.render(gfx);
         },
         //Getter
         isRunning: function() {

@@ -1,4 +1,4 @@
-define(["Display"], function(Display) {
+define(function() {
 
     function Entity(obj) {
         this.pos = {

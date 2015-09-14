@@ -14,6 +14,7 @@ requirejs.config({
     'paths': {
         //General Classes
         'Display': 'classes/Display',
+        'Handler': 'classes/Handler',
         'Game': 'classes/Game',
         'Events': 'classes/Events',
         'Assets': 'classes/Assets',
@@ -21,6 +22,7 @@ requirejs.config({
         //Entity classes
         'Entity': 'entities/Entity',
         'Player': 'entities/Player',
+        'Bullet': 'entities/Bullet',
         //Utilities
         'Utils': 'utils/utils'
     }
