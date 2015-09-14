@@ -1,8 +1,10 @@
 define(["Display"], function(Display) {
 
     function Entity(obj) {
-        this.xpos = obj.xpos;
-        this.ypos = obj.ypos;
+        this.pos = {
+            x: obj.pos.x,
+            y: obj.pos.y
+        };
         this.speed = obj.speed;
         this.width = obj.width;
         this.height = obj.height;

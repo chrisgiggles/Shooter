@@ -5,8 +5,7 @@ define(['Display', 'Events', 'Player'], function(Display, Events, Player) {
         _fps = 1 / 50;
 
     var definePlayer = {
-        xpos: 320,
-        ypos: 400,
+        pos: {x: 320, y: 400},
         speed: 150,
         width: 25,
         height: 40,
@@ -48,7 +47,7 @@ define(['Display', 'Events', 'Player'], function(Display, Events, Player) {
             this.graphics.clearRect(0,0,this.width, this.height);
             //Create rectangle
             this.graphics.fillStyle = "#2B303B";
-            this.graphics.fillRect(this.player.xpos, this.player.ypos,this.player.width,this.player.height);
+            this.graphics.fillRect(this.player.pos.x, this.player.pos.y,this.player.width,this.player.height);
             this.player.render();
         },
         //Getter

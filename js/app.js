@@ -10,20 +10,20 @@
 *
 * */
 requirejs.config({
-    'baseUrl': 'js',
+    'baseUrl': 'js/app',
     'paths': {
         //General Classes
-        'Display': 'app/classes/Display',
-        'Game': 'app/classes/Game',
-        'Events': 'app/classes/Events',
-        'Assets': 'app/classes/Assets',
-        'Input': 'app/classes/Input',
+        'Display': 'classes/Display',
+        'Game': 'classes/Game',
+        'Events': 'classes/Events',
+        'Assets': 'classes/Assets',
+        'Input': 'classes/Input',
         //Entity classes
-        'Entity': 'app/entities/Entity',
-        'Player': 'app/entities/Player',
+        'Entity': 'entities/Entity',
+        'Player': 'entities/Player',
         //Utilities
-        'Utils': 'app/utils/utils'
+        'Utils': 'utils/utils'
     }
 });
 
-require(['app/main']);
+require(['main']);

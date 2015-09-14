@@ -1,4 +1,4 @@
-define(['Utils'], function(Utils) {
+define(function() {
 
     function Input() {
         this.up = false;
