@@ -75,7 +75,24 @@ define(['Entity', 'Bullet', 'Input', 'Sprite'], function(Entity, Bullet, Input, 
     Player.prototype.render = function( gfx ) {
         //Create rectangle
         // console.log(this.sprite.state.idle);
-        gfx.drawImage(this.sprite.div,94,0,this.sprite.width,this.sprite.height,this.pos.x,this.pos.y,this.width,this.height);
+
+        console.log(velocity);
+        if(velocity.x > 0 && velocity.x < 120) {
+            gfx.drawImage(this.sprite.div,142,0,this.sprite.width,this.sprite.height,this.pos.x,this.pos.y,this.width,this.height);
+        }
+        else if(velocity.x >=120) {
+            gfx.drawImage(this.sprite.div,192,0,this.sprite.width,this.sprite.height,this.pos.x,this.pos.y,this.width,this.height);
+        }
+        else if(velocity.x < 0 && velocity.x > -120) {
+            gfx.drawImage(this.sprite.div,46,0,this.sprite.width,this.sprite.height,this.pos.x,this.pos.y,this.width,this.height);
+        }
+        else if(velocity.x <= -120) {
+            gfx.drawImage(this.sprite.div,0,0,this.sprite.width,this.sprite.height,this.pos.x,this.pos.y,this.width,this.height);
+        }
+        else {
+            gfx.drawImage(this.sprite.div,94,0,this.sprite.width,this.sprite.height,this.pos.x,this.pos.y,this.width,this.height);
+        }
+
         bullets.forEach(function(bullet) {
             bullet.render( gfx );
         });
