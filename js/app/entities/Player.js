@@ -4,7 +4,7 @@ define(['Entity', 'Bullet', 'Input', 'Utils'], function(Entity, Bullet, Input, U
 
     var velocity = {x: 0, y: 0};
     var acceleration = 10;
-    var friction = 2;
+    var friction = 3;
     var maxSpeed = 160;
 
     var bullets = [];
@@ -17,9 +17,9 @@ define(['Entity', 'Bullet', 'Input', 'Utils'], function(Entity, Bullet, Input, U
 
     var bulletOptions = {
         pos: {x: 0, y: 0},
-        speed: 200,
-        width: 6,
-        height: 6,
+        speed: 250,
+        width: 10,
+        height: 10,
         sprite: null
     };
 
@@ -33,7 +33,7 @@ define(['Entity', 'Bullet', 'Input', 'Utils'], function(Entity, Bullet, Input, U
 
     //Bullet logic, move out of this class
     Player.prototype.init = function() {
-        setInterval(loadBullet, 150);
+        setInterval(loadBullet, 250);
     };
 
     Player.prototype.update = function(delta) {
@@ -56,9 +56,6 @@ define(['Entity', 'Bullet', 'Input', 'Utils'], function(Entity, Bullet, Input, U
                 arr.splice(i, 1);
             }
         });
-
-        //Destroy bullets
-
 
         //Check bounds
         checkBounds.call(this);

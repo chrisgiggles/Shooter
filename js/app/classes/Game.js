@@ -1,4 +1,4 @@
-define(['Display', 'Events', 'Player'], function( Display, Events, Player) {
+define(['Display', 'Sprite', 'Events', 'Player'], function( Display, Sprite, Events, Player) {
 
     var _display = new Display({width: 640, height: 640}),
         _running = false,
@@ -45,6 +45,8 @@ define(['Display', 'Events', 'Player'], function( Display, Events, Player) {
         render: function( gfx ) {
             //Clear the screen of previous renders
             gfx.clearRect(0,0,this.width, this.height);
+            gfx.fillStyle = "#2b303b";
+            gfx.fillRect(0,0,this.width, this.height);
             this.player.render(gfx);
         },
         //Getter
