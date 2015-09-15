@@ -12,9 +12,8 @@ define(['Entity'], function(Entity) {
     };
 
     Bullet.prototype.render = function(gfx) {
-        gfx.fillStyle = "#88ce02";
-        gfx.fillRect(this.pos.x, this.pos.y - 20, this.height, this.width);
-        gfx.fillRect(this.pos.x + 15, this.pos.y - 20, this.height, this.width);
+        gfx.drawImage(this.sprite.div,27,60,this.sprite.width,this.sprite.height,this.pos.x + 0,this.pos.y - 20,this.width,this.height);
+        gfx.drawImage(this.sprite.div,27,60,this.sprite.width,this.sprite.height,this.pos.x + 34,this.pos.y - 20,this.width,this.height);
     };
 
     return Bullet;

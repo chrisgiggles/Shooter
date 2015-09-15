@@ -6,13 +6,13 @@ define(['Handler', 'Sprite', 'Events', 'Player'], function(Handler, Sprite, Even
     var definePlayer = {
         pos: {x: 320, y: 400},
         speed: 150,
-        width: 30,
-        height: 40,
+        width: 42,
+        height: 54,
         sprite: new Sprite({
             name: 'Hero',
-            url: 'assets/dude_animation_sheet.png',
-            width: 130,
-            height: 130,
+            url: 'assets/sprites.png',
+            width: 42,
+            height: 54,
             state: {
                 idle:[40,40],
                 walk:[60,60],

@@ -1,5 +1,10 @@
 define(['Display', 'Game'],function(Display, Game){
 
+    /*
+    * In this file we create functions to be able to easily pass
+    * around variables from classes that should only have one running instance.
+    * */
+
     //Graphics
     var _display = new Display({width: 640, height: 640});
 
@@ -18,8 +23,10 @@ define(['Display', 'Game'],function(Display, Game){
     //Game
 
     return {
+        //Display
         getGfx: getGfx,
         getDisplayHeight: getDisplayHeight,
         getDisplayWidth: getDisplayWidth
+        //Game
     };
 });

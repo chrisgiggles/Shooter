@@ -1,4 +1,4 @@
-define(['Entity', 'Bullet', 'Input', 'Utils'], function(Entity, Bullet, Input, Utils) {
+define(['Entity', 'Bullet', 'Input', 'Sprite'], function(Entity, Bullet, Input, Sprite) {
 
     var _input = new Input(); // Put in a global handler
 
@@ -18,9 +18,17 @@ define(['Entity', 'Bullet', 'Input', 'Utils'], function(Entity, Bullet, Input, U
     var bulletOptions = {
         pos: {x: 0, y: 0},
         speed: 250,
-        width: 10,
-        height: 10,
-        sprite: null
+        width: 8,
+        height: 22,
+        sprite: new Sprite({
+            name: 'Bullet',
+            url: 'assets/sprites.png',
+            width: 8,
+            height: 22,
+            state: {
+                idle:[40,40]
+            }
+        })
     };
 
     function Player(obj) {
@@ -67,9 +75,7 @@ define(['Entity', 'Bullet', 'Input', 'Utils'], function(Entity, Bullet, Input, U
     Player.prototype.render = function( gfx ) {
         //Create rectangle
         // console.log(this.sprite.state.idle);
-        gfx.fillStyle = "#000000";
-        gfx.fillRect(this.pos.x, this.pos.y, this.width, this.height);
-        gfx.drawImage(this.sprite.div,0,0,this.sprite.width,this.sprite.height,this.pos.x,this.pos.y,this.width,this.height)
+        gfx.drawImage(this.sprite.div,94,0,this.sprite.width,this.sprite.height,this.pos.x,this.pos.y,this.width,this.height);
         bullets.forEach(function(bullet) {
             bullet.render( gfx );
         });
