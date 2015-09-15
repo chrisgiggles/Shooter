@@ -15,10 +15,17 @@ define(function() {
         update: function( delta ) {
             //console.log('updating')
         },
+
         render: function() {
            //console.log('rendering')
+        },
+
+        collides: function(obstacle) {
+            return this.pos.x < obstacle.pos.x + obstacle.width &&
+                    this.pos.x + this.width > obstacle.pos.x &&
+                    this.pos.y < obstacle.pos.y + obstacle.height &&
+                    this.pos.y + this.height > obstacle.pos.y;
         }
     };
-
     return Entity;
 });

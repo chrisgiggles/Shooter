@@ -1,7 +1,6 @@
-define(['Display', 'Sprite', 'Events', 'Player'], function( Display, Sprite, Events, Player) {
+define(['Handler', 'Sprite', 'Events', 'Player'], function(Handler, Sprite, Events, Player) {
 
-    var _display = new Display({width: 640, height: 640}),
-        _running = false,
+    var _running = false,
         _fps = 1 / 50;
 
     var definePlayer = {
@@ -10,22 +9,22 @@ define(['Display', 'Sprite', 'Events', 'Player'], function( Display, Sprite, Eve
         width: 30,
         height: 40,
         sprite: new Sprite({
-          name: 'Hero',
-          url: 'assets/dude_animation_sheet.png',
-          width:130,
-          height:130,
-          state:{
-            idle:[40,40],
-            walk:[60,60],
-            run:[70,70]
-          },
+            name: 'Hero',
+            url: 'assets/dude_animation_sheet.png',
+            width: 130,
+            height: 130,
+            state: {
+                idle:[40,40],
+                walk:[60,60],
+                run:[70,70]
+            }
         })
     };
 
     function Game() {
-        this.graphics = _display.getGfx();
-        this.width = _display.getWidth();
-        this.height = _display.getHeight();
+        this.graphics = Handler.getGfx();
+        this.width = Handler.getDisplayWidth();
+        this.height = Handler.getDisplayHeight();
         this.player = new Player(definePlayer);
     }
 
@@ -34,7 +33,6 @@ define(['Display', 'Sprite', 'Events', 'Player'], function( Display, Sprite, Eve
             if(_running) return;
             //Else start the game
             _running = true;
-            console.log(this.player);
             this.main();
         },
 

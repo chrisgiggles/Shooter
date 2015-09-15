@@ -14,7 +14,7 @@ requirejs.config({
     'paths': {
         //General Classes
         'Display': 'classes/Display',
-        'GlobalHandler': 'classes/GlobalHandler',
+        'Handler': 'classes/Handler',
         'Game': 'classes/Game',
         'Events': 'classes/Events',
         'Sprite': 'classes/Sprite',

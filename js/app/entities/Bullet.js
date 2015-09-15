@@ -13,8 +13,8 @@ define(['Entity'], function(Entity) {
 
     Bullet.prototype.render = function(gfx) {
         gfx.fillStyle = "#88ce02";
-        gfx.fillRect(this.pos.x, this.pos.y - 5, this.height, this.width);
-        gfx.fillRect(this.pos.x + 15, this.pos.y - 5, this.height, this.width);
+        gfx.fillRect(this.pos.x, this.pos.y - 20, this.height, this.width);
+        gfx.fillRect(this.pos.x + 15, this.pos.y - 20, this.height, this.width);
     };
 
     return Bullet;

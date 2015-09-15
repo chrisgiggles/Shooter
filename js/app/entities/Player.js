@@ -3,9 +3,9 @@ define(['Entity', 'Bullet', 'Input', 'Utils'], function(Entity, Bullet, Input, U
     var _input = new Input(); // Put in a global handler
 
     var velocity = {x: 0, y: 0};
-    var acceleration = 10;
-    var friction = 3;
-    var maxSpeed = 160;
+    var acceleration = 20;
+    var friction = 10;
+    var maxSpeed = 180;
 
     var bullets = [];
     //Bullet logic, move out of this class
@@ -37,7 +37,7 @@ define(['Entity', 'Bullet', 'Input', 'Utils'], function(Entity, Bullet, Input, U
     };
 
     Player.prototype.update = function(delta) {
-
+        var self = this;
         //Keyboard input
         calculateVelocity();
         this.pos.y += velocity.y * delta;
@@ -55,6 +55,9 @@ define(['Entity', 'Bullet', 'Input', 'Utils'], function(Entity, Bullet, Input, U
             if(bullet.pos.y === 0) {
                 arr.splice(i, 1);
             }
+            if(bullet.collides(self)) {
+                console.log('friendly fire');
+            }
         });
 
         //Check bounds
@@ -64,6 +67,8 @@ define(['Entity', 'Bullet', 'Input', 'Utils'], function(Entity, Bullet, Input, U
     Player.prototype.render = function( gfx ) {
         //Create rectangle
         // console.log(this.sprite.state.idle);
+        gfx.fillStyle = "#000000";
+        gfx.fillRect(this.pos.x, this.pos.y, this.width, this.height);
         gfx.drawImage(this.sprite.div,0,0,this.sprite.width,this.sprite.height,this.pos.x,this.pos.y,this.width,this.height)
         bullets.forEach(function(bullet) {
             bullet.render( gfx );
