@@ -7,9 +7,19 @@ define(['Display', 'Sprite', 'Events', 'Player'], function( Display, Sprite, Eve
     var definePlayer = {
         pos: {x: 320, y: 400},
         speed: 150,
-        width: 25,
+        width: 30,
         height: 40,
-        sprite: null
+        sprite: new Sprite({
+          name: 'Hero',
+          url: 'assets/dude_animation_sheet.png',
+          width:130,
+          height:130,
+          state:{
+            idle:[40,40],
+            walk:[60,60],
+            run:[70,70]
+          },
+        })
     };
 
     function Game() {

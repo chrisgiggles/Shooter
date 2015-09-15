@@ -3,10 +3,10 @@ define(function() {
     function Sprite(spriteOptions) {
         // TODO  create base for sprite
         this.name = spriteOptions.name;
-        this.url = spriteOptions.src;
-        this.width = spriteOptions.sw;
-        this.height = spriteOptions.sh;
-        this.sprites = spriteOptions.sprites;
+        this.url = spriteOptions.url;
+        this.width = spriteOptions.width;
+        this.height = spriteOptions.height;
+        this.state = spriteOptions.state;
 
         this.init(spriteOptions);
 
@@ -16,14 +16,15 @@ define(function() {
         init: function(spriteSetup) {
             // TODO  create div element for sprite
             var body = document.getElementsByTagName('body')[0];
-            var spriteDiv = document.createElement('img');
-            spriteDiv.setAttribute('id', this.name);
-            spriteDiv.setAttribute('src', this.url);
-            spriteDiv.setAttribute('style', 'display:none');
+            var imageDiv = document.createElement('img');
+            imageDiv.setAttribute('id', this.name);
+            imageDiv.setAttribute('src', this.url);
+            imageDiv.setAttribute('style', 'display:none');
 
-            body.appendChild(spriteDiv);
-            this.div = spriteDiv;
-            this.generateDrawSprite(spriteDiv);
+            body.appendChild(imageDiv);
+            this.div = imageDiv;
+            console.log(this);
+            // this.generateDrawSprite(spriteDiv);
         },
         generateDrawSprite: function(spriteObject) {
             // TODO

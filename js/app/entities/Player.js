@@ -63,9 +63,8 @@ define(['Entity', 'Bullet', 'Input', 'Utils'], function(Entity, Bullet, Input, U
 
     Player.prototype.render = function( gfx ) {
         //Create rectangle
-        gfx.fillStyle = "#e54d42";
-        gfx.fillRect(this.pos.x, this.pos.y, this.width, this.height);
-
+        // console.log(this.sprite.state.idle);
+        gfx.drawImage(this.sprite.div,0,0,this.sprite.width,this.sprite.height,this.pos.x,this.pos.y,this.width,this.height)
         bullets.forEach(function(bullet) {
             bullet.render( gfx );
         });

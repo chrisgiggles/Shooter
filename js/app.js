@@ -18,7 +18,6 @@ requirejs.config({
         'Game': 'classes/Game',
         'Events': 'classes/Events',
         'Sprite': 'classes/Sprite',
-        'Assets': 'classes/Assets',
         'Input': 'classes/Input',
         //Entity classes
         'Entity': 'entities/Entity',
