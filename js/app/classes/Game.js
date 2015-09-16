@@ -15,6 +15,7 @@ define(['Display', 'Sprite', 'Events', 'Player'], function( Display, Sprite, Eve
           width:130,
           height:130,
           state:{
+            // TODO function för att pendla mellan crop värden
             idle:[40,40],
             walk:[60,60],
             run:[70,70]

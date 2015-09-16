@@ -23,8 +23,6 @@ define(function() {
 
             body.appendChild(imageDiv);
             this.div = imageDiv;
-            console.log(this);
-            // this.generateDrawSprite(spriteDiv);
         },
         generateDrawSprite: function(spriteObject) {
             // TODO
