@@ -26,7 +26,7 @@ define(function() {
         },
         generateDrawSprite: function(spriteObject) {
             // TODO
-            return // drawImage(monkey.div, 0, 0, 135, 135, 20, 20, 80, 80);
+            return; // drawImage(monkey.div, 0, 0, 135, 135, 20, 20, 80, 80);
         },
         log: function() {
             // console.log('log')
