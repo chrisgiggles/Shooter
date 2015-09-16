@@ -3,9 +3,9 @@ define(['Entity', 'Bullet', 'Input', 'Sprite'], function(Entity, Bullet, Input, 
     var _input = new Input(); // Put in a global handler
 
     var velocity = {x: 0, y: 0};
-    var acceleration = 20;
+    var acceleration = 30;
     var friction = 10;
-    var maxSpeed = 180;
+    var maxSpeed = 200;
 
     var bullets = [];
     //Bullet logic, move out of this class
@@ -17,7 +17,7 @@ define(['Entity', 'Bullet', 'Input', 'Sprite'], function(Entity, Bullet, Input, 
 
     var bulletOptions = {
         pos: {x: 0, y: 0},
-        speed: 250,
+        speed: 300,
         width: 8,
         height: 22,
         sprite: new Sprite({
@@ -63,7 +63,7 @@ define(['Entity', 'Bullet', 'Input', 'Sprite'], function(Entity, Bullet, Input, 
             if(bullet.pos.y === 0) {
                 arr.splice(i, 1);
             }
-            if(bullet.collides(self)) {
+            if(self.collides(bullet)) {
                 console.log('friendly fire');
             }
         });
@@ -77,16 +77,16 @@ define(['Entity', 'Bullet', 'Input', 'Sprite'], function(Entity, Bullet, Input, 
         // console.log(this.sprite.state.idle);
 
         console.log(velocity);
-        if(velocity.x > 0 && velocity.x < 120) {
+        if(velocity.x > 0 && velocity.x < 100) {
             gfx.drawImage(this.sprite.div,142,0,this.sprite.width,this.sprite.height,this.pos.x,this.pos.y,this.width,this.height);
         }
-        else if(velocity.x >=120) {
+        else if(velocity.x >=100) {
             gfx.drawImage(this.sprite.div,192,0,this.sprite.width,this.sprite.height,this.pos.x,this.pos.y,this.width,this.height);
         }
-        else if(velocity.x < 0 && velocity.x > -120) {
+        else if(velocity.x < 0 && velocity.x > -100) {
             gfx.drawImage(this.sprite.div,46,0,this.sprite.width,this.sprite.height,this.pos.x,this.pos.y,this.width,this.height);
         }
-        else if(velocity.x <= -120) {
+        else if(velocity.x <= -100) {
             gfx.drawImage(this.sprite.div,0,0,this.sprite.width,this.sprite.height,this.pos.x,this.pos.y,this.width,this.height);
         }
         else {
