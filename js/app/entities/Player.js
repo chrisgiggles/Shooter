@@ -1,8 +1,10 @@
-define(['Entity', 'Bullet', 'Input', 'Sprite'], function(Entity, Bullet, Input, Sprite) {
-
+define(['Entity', 'Bullet', 'Input', 'Sprite', 'Handler'], function(Entity, Bullet, Input, Sprite, Handler) {
+    console.log(Handler);
     var _input = new Input(); // Put in a global handler
-
-    var velocity = {x: 0, y: 0};
+    var velocity = {
+        x: 0,
+        y: 0
+    };
     var acceleration = 30;
     var friction = 10;
     var maxSpeed = 200;
@@ -10,13 +12,17 @@ define(['Entity', 'Bullet', 'Input', 'Sprite'], function(Entity, Bullet, Input, 
     var bullets = [];
     //Bullet logic, move out of this class
     var isFire = false;
-    function loadBullet() {
+
+    function loadBullet()  {
         isFire = true;
         clearInterval(loadBullet);
     }
 
     var bulletOptions = {
-        pos: {x: 0, y: 0},
+        pos: {
+            x: 0,
+            y: 0
+        },
         speed: 300,
         width: 8,
         height: 22,
@@ -26,7 +32,7 @@ define(['Entity', 'Bullet', 'Input', 'Sprite'], function(Entity, Bullet, Input, 
             width: 8,
             height: 22,
             state: {
-                idle:[40,40]
+                idle: [40, 40]
             }
         })
     };
@@ -44,7 +50,7 @@ define(['Entity', 'Bullet', 'Input', 'Sprite'], function(Entity, Bullet, Input, 
         setInterval(loadBullet, 250);
     };
 
-    Player.prototype.update = function(delta) {
+    Player.prototype.update = function(delta)  {
         var self = this;
         //Keyboard input
         calculateVelocity();
@@ -52,7 +58,7 @@ define(['Entity', 'Bullet', 'Input', 'Sprite'], function(Entity, Bullet, Input, 
         this.pos.x += velocity.x * delta;
 
         //Fire bullets
-        if(_input.shoot && isFire) {
+        if (_input.shoot && isFire) {
             isFire = false;
             shoot(this.pos.x, this.pos.y);
         }
@@ -60,10 +66,10 @@ define(['Entity', 'Bullet', 'Input', 'Sprite'], function(Entity, Bullet, Input, 
         bullets.forEach(function(bullet, i, arr) {
             bullet.update(delta);
             //If outside bounds, splice self out of list
-            if(bullet.pos.y === 0) {
+            if (bullet.pos.y === 0)  {
                 arr.splice(i, 1);
             }
-            if(self.collides(bullet)) {
+            if (self.collides(bullet)) {
                 console.log('friendly fire');
             }
         });
@@ -72,29 +78,26 @@ define(['Entity', 'Bullet', 'Input', 'Sprite'], function(Entity, Bullet, Input, 
         checkBounds.call(this);
     };
 
-    Player.prototype.render = function( gfx ) {
+    Player.prototype.render = function(gfx)  {
         //Create rectangle
 
 
         console.log(velocity);
-        if(velocity.x > 0 && velocity.x < 100) {
-            gfx.drawImage(this.sprite.div,142,0,this.sprite.width,this.sprite.height,this.pos.x,this.pos.y,this.width,this.height);
-        }
-        else if(velocity.x >=100) {
-            gfx.drawImage(this.sprite.div,192,0,this.sprite.width,this.sprite.height,this.pos.x,this.pos.y,this.width,this.height);
-        }
-        else if(velocity.x < 0 && velocity.x > -100) {
-            gfx.drawImage(this.sprite.div,46,0,this.sprite.width,this.sprite.height,this.pos.x,this.pos.y,this.width,this.height);
-        }
-        else if(velocity.x <= -100) {
-            gfx.drawImage(this.sprite.div,0,0,this.sprite.width,this.sprite.height,this.pos.x,this.pos.y,this.width,this.height);
-        }
-        else {
-            gfx.drawImage(this.sprite.div,94,0,this.sprite.width,this.sprite.height,this.pos.x,this.pos.y,this.width,this.height);
+        if (velocity.x > 0 && velocity.x < 100) {
+            gfx.drawImage(this.sprite.div, 142, 0, this.sprite.width, this.sprite.height, this.pos.x, this.pos.y, this.width, this.height);
+        } else if (velocity.x >= 100) {
+            gfx.drawImage(this.sprite.div, 192, 0, this.sprite.width, this.sprite.height, this.pos.x, this.pos.y, this.width, this.height);
+        } else if (velocity.x < 0 && velocity.x > -100)  {
+            gfx.drawImage(this.sprite.div, 46, 0, this.sprite.width, this.sprite.height, this.pos.x, this.pos.y, this.width, this.height);
+            // gfx.drawImage(runAnimation(46, 0);)
+        } else if (velocity.x <= -100)  {
+            gfx.drawImage(this.sprite.div, 0, 0, this.sprite.width, this.sprite.height, this.pos.x, this.pos.y, this.width, this.height);
+        } else {
+            gfx.drawImage(this.sprite.div, 94, 0, this.sprite.width, this.sprite.height, this.pos.x, this.pos.y, this.width, this.height);
         }
 
         bullets.forEach(function(bullet) {
-            bullet.render( gfx );
+            bullet.render(gfx);
         });
     };
 
@@ -105,68 +108,65 @@ define(['Entity', 'Bullet', 'Input', 'Sprite'], function(Entity, Bullet, Input, 
     }
 
     function calculateVelocity() {
-        if(_input.down) {
+        if (_input.down) {
             velocity.y += acceleration;
             if (velocity.y > maxSpeed) {
                 velocity.y = maxSpeed;
             }
         }
 
-        if(_input.up) {
+        if (_input.up) {
             velocity.y -= acceleration;
             if (velocity.y < -maxSpeed) {
                 velocity.y = -maxSpeed;
             }
         }
 
-        if(!_input.up && !_input.down) {
-            if(velocity.y < 0) {
+        if (!_input.up && !_input.down) {
+            if (velocity.y < 0) {
                 velocity.y += friction;
-                if(velocity.y >= 0) {
+                if (velocity.y >= 0) {
                     velocity.y = 0;
                 }
-            }
-            else {
+            } else {
                 velocity.y -= friction;
-                if(velocity.y <= 0 ) {
+                if (velocity.y <= 0) {
                     velocity.y = 0;
                 }
             }
 
         }
 
-        if(_input.right) {
+        if (_input.right) {
             velocity.x += acceleration;
             if (velocity.x > maxSpeed) {
                 velocity.x = maxSpeed;
             }
         }
-        if(_input.left) {
+        if (_input.left) {
             velocity.x -= acceleration;
             if (velocity.x < -maxSpeed) {
                 velocity.x = -maxSpeed;
             }
         }
 
-        if(!_input.right && !_input.left)
-        {
-            if(velocity.x < 0) {
+        if (!_input.right && !_input.left) {
+            if (velocity.x < 0) {
                 velocity.x += friction;
-                if(velocity.x >= 0) {
+                if (velocity.x >= 0) {
                     velocity.x = 0;
                 }
-            }
-            else {
+            } else {
                 velocity.x -= friction;
-                if(velocity.x <= 0 ) {
+                if (velocity.x <= 0) {
                     velocity.x = 0;
                 }
             }
         }
     }
 
-    function checkBounds() {
-        if(this.pos.x <= 0) this.pos.x = 0;
+    function checkBounds()  {
+        if (this.pos.x <= 0) this.pos.x = 0;
         if (this.pos.x >= 640 - this.width) this.pos.x = 640 - this.width;
 
         if (this.pos.y <= 0) this.pos.y = 0;
