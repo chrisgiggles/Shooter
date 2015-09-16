@@ -1,11 +1,11 @@
-define(['Entity', 'Bullet', 'Input', 'Utils'], function(Entity, Bullet, Input, Utils) {
+define(['Entity', 'Bullet', 'Input', 'Sprite'], function(Entity, Bullet, Input, Sprite) {
 
     var _input = new Input(); // Put in a global handler
 
     var velocity = {x: 0, y: 0};
-    var acceleration = 10;
-    var friction = 3;
-    var maxSpeed = 160;
+    var acceleration = 30;
+    var friction = 10;
+    var maxSpeed = 200;
 
     var bullets = [];
     //Bullet logic, move out of this class
@@ -17,10 +17,18 @@ define(['Entity', 'Bullet', 'Input', 'Utils'], function(Entity, Bullet, Input, U
 
     var bulletOptions = {
         pos: {x: 0, y: 0},
-        speed: 250,
-        width: 10,
-        height: 10,
-        sprite: null
+        speed: 300,
+        width: 8,
+        height: 22,
+        sprite: new Sprite({
+            name: 'Bullet',
+            url: 'assets/sprites.png',
+            width: 8,
+            height: 22,
+            state: {
+                idle:[40,40]
+            }
+        })
     };
 
     function Player(obj) {
@@ -37,7 +45,7 @@ define(['Entity', 'Bullet', 'Input', 'Utils'], function(Entity, Bullet, Input, U
     };
 
     Player.prototype.update = function(delta) {
-
+        var self = this;
         //Keyboard input
         calculateVelocity();
         this.pos.y += velocity.y * delta;
@@ -55,6 +63,9 @@ define(['Entity', 'Bullet', 'Input', 'Utils'], function(Entity, Bullet, Input, U
             if(bullet.pos.y === 0) {
                 arr.splice(i, 1);
             }
+            if(self.collides(bullet)) {
+                console.log('friendly fire');
+            }
         });
 
         //Check bounds
@@ -64,7 +75,24 @@ define(['Entity', 'Bullet', 'Input', 'Utils'], function(Entity, Bullet, Input, U
     Player.prototype.render = function( gfx ) {
         //Create rectangle
 
-        gfx.drawImage(this.sprite.div,0,0,this.sprite.width,this.sprite.height,this.pos.x,this.pos.y,this.width,this.height)
+
+        console.log(velocity);
+        if(velocity.x > 0 && velocity.x < 100) {
+            gfx.drawImage(this.sprite.div,142,0,this.sprite.width,this.sprite.height,this.pos.x,this.pos.y,this.width,this.height);
+        }
+        else if(velocity.x >=100) {
+            gfx.drawImage(this.sprite.div,192,0,this.sprite.width,this.sprite.height,this.pos.x,this.pos.y,this.width,this.height);
+        }
+        else if(velocity.x < 0 && velocity.x > -100) {
+            gfx.drawImage(this.sprite.div,46,0,this.sprite.width,this.sprite.height,this.pos.x,this.pos.y,this.width,this.height);
+        }
+        else if(velocity.x <= -100) {
+            gfx.drawImage(this.sprite.div,0,0,this.sprite.width,this.sprite.height,this.pos.x,this.pos.y,this.width,this.height);
+        }
+        else {
+            gfx.drawImage(this.sprite.div,94,0,this.sprite.width,this.sprite.height,this.pos.x,this.pos.y,this.width,this.height);
+        }
+
         bullets.forEach(function(bullet) {
             bullet.render( gfx );
         });
