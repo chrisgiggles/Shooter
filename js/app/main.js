@@ -1,4 +1,5 @@
 require(['Game'], function(Game) {
+    window.Handler = {};
     var game = new Game();
     game.init();
 });

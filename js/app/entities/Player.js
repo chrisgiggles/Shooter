@@ -1,5 +1,5 @@
 define(['Entity', 'Bullet', 'Input', 'Sprite'], function(Entity, Bullet, Input, Sprite) {
-
+    //console.log('why');
     var _input = new Input(); // Put in a global handler
 
     var velocity = {x: 0, y: 0};
@@ -76,7 +76,6 @@ define(['Entity', 'Bullet', 'Input', 'Sprite'], function(Entity, Bullet, Input, 
         //Create rectangle
         // console.log(this.sprite.state.idle);
 
-        console.log(velocity);
         if(velocity.x > 0 && velocity.x < 100) {
             gfx.drawImage(this.sprite.div,142,0,this.sprite.width,this.sprite.height,this.pos.x,this.pos.y,this.width,this.height);
         }
@@ -148,8 +147,7 @@ define(['Entity', 'Bullet', 'Input', 'Sprite'], function(Entity, Bullet, Input, 
             }
         }
 
-        if(!_input.right && !_input.left)
-        {
+        if(!_input.right && !_input.left) {
             if(velocity.x < 0) {
                 velocity.x += friction;
                 if(velocity.x >= 0) {

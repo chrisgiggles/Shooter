@@ -1,7 +1,8 @@
-define(['Handler', 'Sprite', 'Events', 'Player'], function(Handler, Sprite, Events, Player) {
-
+define(['Display', 'Player', 'Sprite'], function(Display, Player, Sprite) {
     var _running = false,
         _fps = 1 / 50;
+
+    var _display = new Display({width: 640, height: 640});
 
     var definePlayer = {
         pos: {x: 320, y: 400},
@@ -9,8 +10,6 @@ define(['Handler', 'Sprite', 'Events', 'Player'], function(Handler, Sprite, Even
         width: 42,
         height: 54,
         sprite: new Sprite({
-            name: 'Hero',
-            url: 'assets/sprites.png',
             width: 42,
             height: 54,
             state: {
@@ -22,9 +21,9 @@ define(['Handler', 'Sprite', 'Events', 'Player'], function(Handler, Sprite, Even
     };
 
     function Game() {
-        this.graphics = Handler.getGfx();
-        this.width = Handler.getDisplayWidth();
-        this.height = Handler.getDisplayHeight();
+        this.graphics = _display.getGfx();
+        this.width = _display.getWidth();
+        this.height = _display.getHeight();
         this.player = new Player(definePlayer);
     }
 
@@ -53,7 +52,7 @@ define(['Handler', 'Sprite', 'Events', 'Player'], function(Handler, Sprite, Even
         render: function( gfx ) {
             //Clear the screen of previous renders
             gfx.clearRect(0,0,this.width, this.height);
-            gfx.fillStyle = "#2b303b";
+            gfx.fillStyle = "#000000";
             gfx.fillRect(0,0,this.width, this.height);
             this.player.render(gfx);
         },
