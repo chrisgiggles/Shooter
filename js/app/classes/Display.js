@@ -1,50 +1,52 @@
-define(function() {
+var Handler = require('./Handler.js');
 
-    //Private variables
-    var _width,
-        _height,
-        _ctx;
+//Set global values
+Handler.GlobalValues.display = {};
 
-    function Display(displayOptions) {
-        //Set variables
-        _width = displayOptions.width;
-        _height = displayOptions.height;
-        //Run init in constructor
-        this.init();
-    }
+//Private variables
+var _width,
+    _height,
+    _ctx;
 
-    Display.prototype = {
-        init: function() {
-            //Add Canvas with specified dimensions and context to the body
-            var body = document.getElementsByTagName('body')[0];
-            var canvas = document.createElement('canvas');
-            canvas.setAttribute( 'width', this.getWidth() );
-            canvas.setAttribute( 'height', this.getHeight() );
-            body.appendChild(canvas);
+function Display(displayOptions) {
+    //Set variables
+    _width = displayOptions.width;
+    _height = displayOptions.height;
+    //Run init in constructor
+    this.init();
+}
 
-            //Add the context to the the constructor
-            _ctx = canvas.getContext('2d');
-        },
+Display.prototype = {
+    init: function() {
+        //Add Canvas with specified dimensions and context to the body
+        var body = document.getElementsByTagName('body')[0];
+        var canvas = document.createElement('canvas');
+        canvas.setAttribute( 'width', this.getWidth() );
+        canvas.setAttribute( 'height', this.getHeight() );
+        body.appendChild(canvas);
 
-        //GETTERS
-        getWidth: function() {
-            return _width;
-        },
+        Handler.GlobalValues.display = { width: this.getWidth(), height: this.getHeight() };
+        //Add the context to the the constructor
+        _ctx = canvas.getContext('2d');
+    },
 
-        getHeight: function() {
-            return _height;
-        },
+    //GETTERS
+    getWidth: function() {
+        return _width;
+    },
 
-        getGfx: function() {
-           if(_ctx != null) {
-               return _ctx;
-           }
-           else {
-               throw "Cannot return graphics.";
-           }
+    getHeight: function() {
+        return _height;
+    },
+
+    getGfx: function() {
+        if(_ctx != null) {
+            return _ctx;
         }
-    };
+        else {
+            throw "Cannot return graphics.";
+        }
+    }
+};
 
-    return Display;
-
-});
+module.exports = Display;
